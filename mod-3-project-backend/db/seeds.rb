@@ -9,10 +9,11 @@
 User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: Faker::GreekPhilosophers.name)
 end
 
-FavoriteSong.create(title: Faker::Music::PearlJam.song, artist: Faker::Music::RockBand.name, video_url: 'https://youtu.be/pZtx9ba_bWc', likes: 0, user_id: User.all.sample.id)
-FavoriteSong.create(title: Faker::Music::PearlJam.song, artist: Faker::Music::RockBand.name, video_url: 'https://youtu.be/hs8y3kneqrs', likes: 0, user_id: User.all.sample.id)
-FavoriteSong.create(title: Faker::Music::PearlJam.song, artist: Faker::Music::RockBand.name, video_url: 'https://youtu.be/PM_VIATPYQc', likes: 0, user_id: User.all.sample.id)
+FavoriteSong.create(title: Faker::Music::PearlJam.song, artist: Faker::Music::RockBand.name, video_url: 'https://youtu.be/pZtx9ba_bWc', likes: 0, user_id: 3)
+FavoriteSong.create(title: Faker::Music::PearlJam.song, artist: Faker::Music::RockBand.name, video_url: 'https://youtu.be/hs8y3kneqrs', likes: 0, user_id: 2)
+FavoriteSong.create(title: Faker::Music::PearlJam.song, artist: Faker::Music::RockBand.name, video_url: 'https://youtu.be/PM_VIATPYQc', likes: 0, user_id: 1)
 
-Comment.create(user_id: User.all.sample.id, favorite_song_id: FavoriteSong.all.sample.id, content: Faker::Lorem.sentence)
-Comment.create(user_id: User.all.sample.id, favorite_song_id: FavoriteSong.all.sample.id, content: Faker::Lorem.sentence)
-Comment.create(user_id: User.all.sample.id, favorite_song_id: FavoriteSong.all.sample.id, content: Faker::Lorem.sentence)
+Comment.create(user_id: User.first.id, favorite_song_id: FavoriteSong.all.sample.id, content: "This song is amazing!")
+Comment.create(user_id: User.second.id, favorite_song_id: FavoriteSong.all.sample.id, content: "Not the best :(")
+Comment.create(user_id: User.third.id, favorite_song_id: FavoriteSong.all.sample.id, content: "Rock OUTTTTTTT")
+Comment.create(user_id: User.third.id, favorite_song_id: FavoriteSong.all.sample.id, content: "Wow!")
