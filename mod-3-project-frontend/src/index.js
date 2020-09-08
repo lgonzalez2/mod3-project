@@ -56,9 +56,11 @@ function addSongCards (songs) {
 
         let ul = document.createElement('ul');
         ul.setAttribute('class', 'comments');
-        let li = document.createElement('li');
-        li.innerText = 'Comments go here';
-        ul.append(li);
+        for (let i = 0; i < song.comments.length; i++) {
+            let li = document.createElement('li');
+            li.innerText = song.comments[i].content;
+            ul.append(li);
+        }
 
         let commentForm = document.createElement('form');
         commentForm.setAttribute('class', 'comment-form');
