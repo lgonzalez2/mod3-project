@@ -9,9 +9,11 @@
 User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: Faker::GreekPhilosophers.name)
 end
 
-FavoriteSong.create(title: Faker::Music::PearlJam.song, artist: Faker::Music::RockBand.name, video_url: 'https://youtu.be/pZtx9ba_bWc', likes: 0, user_id: User.all.sample.id)
-FavoriteSong.create(title: Faker::Music::PearlJam.song, artist: Faker::Music::RockBand.name, video_url: 'https://youtu.be/hs8y3kneqrs', likes: 0, user_id: User.all.sample.id)
-FavoriteSong.create(title: Faker::Music::PearlJam.song, artist: Faker::Music::RockBand.name, video_url: 'https://youtu.be/PM_VIATPYQc', likes: 0, user_id: User.all.sample.id)
+# video_url needs to be in this format to currently work: "https://www.youtube.com/embed/9cN1XCpfWD4"
+FavoriteSong.create(title: "Hey You", artist: "Pink Floyd", video_url: "https://www.youtube.com/embed/TFjmvfRvjTc", likes: 3, user_id: 3)
+FavoriteSong.create(title: "Stairway to Heaven", artist: "Led Zeppelin", video_url: "https://www.youtube.com/embed/xbhCPt6PZIU", likes: 0, user_id: 2)
+FavoriteSong.create(title: "Shadows", artist: "The Midnight", video_url: "https://www.youtube.com/embed/sGwtkJaQ9n0", likes: 10, user_id: 1)
+FavoriteSong.create(title: "Maria Tambien", artist: "Kraungbin", video_url: "https://www.youtube.com/embed/9cN1XCpfWD4", likes: 5, user_id: 2)
 
 Comment.create(user_id: User.first.id, favorite_song_id: FavoriteSong.all.sample.id, content: "This song is amazing!")
 Comment.create(user_id: User.second.id, favorite_song_id: FavoriteSong.all.sample.id, content: "Not the best :(")

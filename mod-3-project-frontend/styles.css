@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  body {
+    padding: 20px;
+    text-align: center;
+    background-color: #fafafa;
+  }
+  
+  .logo {
+    margin-bottom: 20px;
+  }
+  
+  .favorite-songs-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 360px);
+    grid-gap: 3rem;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    justify-content: center;
+  }
+  
+  .song-card {
+    width: 360px;
+    border: 8px solid #030303;
+    border-radius: 20px;
+    text-align: left;
+    background-color: white;
+    box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
+    transition: all .5s ease; /* back to normal */
+    overflow: hidden;
+  }
+  
+  .image {
+    width: 300px;
+    border: 1px solid black;
+  }
+  
+  .user-title {
+    text-align: left;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0602f7dd;
+  }
+
+  .song-header {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0d0d0e;
+    }
+  
+  
+  .likes-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+  
+  .likes {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  .like-button {
+    color: rgb(255, 127, 80);
+    font-size: 1.5rem;
+    border: none;
+    background: none;
+    transition: color 300ms;
+    cursor: pointer;
+  }
+
+  .song-card:hover {
+    transform: translate3D(0,-1px,0) scale(1.2);
+    box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+    transition: all .4s ease; /* zoom in */
+  }
+  
+  .like-button:hover {
+    color: rgb(241, 71, 19);
+  }
+  
+  .like-button:active {
+    color: rgb(253, 159, 124);
+  }
+  
+  .like-button:focus {
+    outline: none;
+  }
+  
+  .comments {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 10px;
+    font-size: 0.85rem;
+  }
+  
+  .comments li {
+    margin: 2px 0;
+    letter-spacing: 0.2px;
+  }
+  
+  .comment-form {
+    width: 100%;
+    border-top: 1px solid #00000020;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .comment-input {
+    width: 83%;
+    border: none;
+    font-size: 0.8rem;
+  }
+  
+  .comment-input:focus {
+    outline: none;
+  }
+  
+  .comment-button {
+    border: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgb(92, 114, 238);
+    cursor: pointer;
+    transition: color 300ms;
+  }
+  
+  .comment-button:hover {
+    color: rgb(37, 68, 245);
+  }
+  
+  .comment-button:active {
+    color: rgb(127, 146, 250);
+  }
+  
+  .comment-button:focus {
+    outline: none;
+  }
+  
+  
