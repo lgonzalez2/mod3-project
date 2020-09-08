@@ -14,32 +14,47 @@
     margin-bottom: 20px;
   }
   
-  .image-container {
-    width: 100%;
-    display: flex;
+  .favorite-songs-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 360px);
+    grid-gap: 3rem;
+    padding-top: 10px;
+    padding-bottom: 30px;
     justify-content: center;
   }
   
-  .image-card {
-    width: 300px;
-    border: 1px solid #00000020;
-    border-radius: 2px;
+  .song-card {
+    width: 360px;
+    border: 8px solid #030303;
+    border-radius: 20px;
     text-align: left;
     background-color: white;
+    box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
+    transition: all .5s ease; /* back to normal */
+    overflow: hidden;
   }
   
   .image {
     width: 300px;
-    /* border: 1px solid black; */
+    border: 1px solid black;
   }
   
-  .title {
+  .user-title {
     text-align: left;
     padding: 15px 10px;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #000000dd;
+    color: #0602f7dd;
   }
+
+  .song-header {
+    text-align: center;
+    padding: 15px 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0d0d0e;
+    }
+  
   
   .likes-section {
     display: flex;
@@ -60,6 +75,12 @@
     background: none;
     transition: color 300ms;
     cursor: pointer;
+  }
+
+  .song-card:hover {
+    transform: translate3D(0,-1px,0) scale(1.2);
+    box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+    transition: all .4s ease; /* zoom in */
   }
   
   .like-button:hover {
