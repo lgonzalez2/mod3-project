@@ -108,10 +108,19 @@ loginForm.addEventListener('submit', (e) => {
 
     if (findUser) {
         sessionStorage.setItem('userId', findUser.id);
-        //sessionStorage.userId to get current user id 
     } else {
-        console.log('cannot find user');
-        //Post
+        fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+            Accept: "application/json",
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify({
+            "username": currentUser}),
+        })
+            .then(res => res.json()).then(json => {
+        user = json;
+        sessionStorage.setItem('userId', user.id)
+        })
     }
-
-  });
+});
