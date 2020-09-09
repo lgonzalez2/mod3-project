@@ -6,7 +6,9 @@ const loginContainer = document.querySelector('.login-container');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-loadFavoriteSongs()
+    sessionStorage.clear();
+    loadFavoriteSongs()
+    fetchUsers()
 });
 
 
@@ -21,6 +23,14 @@ function loadFavoriteSongs() {
         addSongCards(song);
     })
     });
+};
+
+function fetchUsers() {
+    fetch('http://localhost:3000/users')
+        .then(res => res.json())
+        .then(json => {
+    users = json;
+    })
 };
 
 function addSongCards (song) {
@@ -90,8 +100,18 @@ function addSongCards (song) {
 
 
 loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    console.log('Hello');
+    e.preventDefault(e);
     loginContainer.style.display = "none";
     cardsContainer.style.display = "grid";
+    let currentUser = e.target.username.value;
+    let findUser = users.find(user => user.username === currentUser);
+
+    if (findUser) {
+        sessionStorage.setItem('userId', findUser.id);
+        //sessionStorage.userId to get current user id 
+    } else {
+        console.log('cannot find user');
+        //Post
+    }
+
   });

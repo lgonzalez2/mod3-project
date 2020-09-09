@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 3.times do
-User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, username: Faker::GreekPhilosophers.name)
+User.create(username: Faker::GreekPhilosophers.name)
 end
 
 # video_url needs to be in this format to currently work: "https://www.youtube.com/embed/9cN1XCpfWD4"
