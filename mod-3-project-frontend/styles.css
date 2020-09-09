@@ -16,7 +16,7 @@
   
   .favorite-songs-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 360px);
+    grid-template-columns: repeat(auto-fill, 350px);
     grid-gap: 3rem;
     padding-top: 10px;
     padding-bottom: 30px;
@@ -24,7 +24,7 @@
   }
   
   .song-card {
-    width: 360px;
+    width: 350px;
     border: 8px solid #030303;
     border-radius: 20px;
     text-align: left;
