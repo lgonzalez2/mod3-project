@@ -3,14 +3,11 @@ const loginForm = document.querySelector('.login-form');
 const loginContainer = document.querySelector('.login-container');
 
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
-loadFavoriteSongs()
+    sessionStorage.clear();
+    loadFavoriteSongs()
+    fetchUsers()
 });
-
-
-
 
 function loadFavoriteSongs() {
     fetch('http://localhost:3000/favorite_songs')
@@ -21,6 +18,14 @@ function loadFavoriteSongs() {
         addSongCards(song);
     })
     });
+};
+
+function fetchUsers() {
+    fetch('http://localhost:3000/users')
+        .then(res => res.json())
+        .then(json => {
+    users = json;
+    })
 };
 
 function addSongCards (song) {
@@ -141,7 +146,27 @@ function addSongCards (song) {
 
 
 loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+    e.preventDefault(e);
     loginContainer.style.display = "none";
     cardsContainer.style.display = "grid";
-  });
+    let currentUser = e.target.username.value;
+    let findUser = users.find(user => user.username === currentUser);
+
+    if (findUser) {
+        sessionStorage.setItem('userId', findUser.id);
+    } else {
+        fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {
+            Accept: "application/json",
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify({
+            "username": currentUser}),
+        })
+            .then(res => res.json()).then(json => {
+        user = json;
+        sessionStorage.setItem('userId', user.id)
+        })
+    }
+});
