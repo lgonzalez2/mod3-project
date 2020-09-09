@@ -3,16 +3,11 @@ const loginForm = document.querySelector('.login-form');
 const loginContainer = document.querySelector('.login-container');
 
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.clear();
     loadFavoriteSongs()
     fetchUsers()
 });
-
-
-
 
 function loadFavoriteSongs() {
     fetch('http://localhost:3000/favorite_songs')
@@ -60,16 +55,67 @@ function addSongCards (song) {
     //due to either copyright or the fact that some embedding doesn't work within
     //local host.
 
-    let likesSec = document.createElement('div');
-    likesSec.setAttribute('class', 'likes-section');
+    let likesSection = document.createElement('div');
+    likesSection.setAttribute('class', 'likes-section');
     let likes = document.createElement('span');
+    const btnDiv = document.createElement('div');
+    btnDiv.setAttribute('class', 'button-div');
+    console.log(btnDiv)
+
     likes.setAttribute('class', 'likes');
     likes.innerText = `${song.likes} likes`;
     let likeBtn = document.createElement('button');
     likeBtn.setAttribute('class', 'like-button');
     likeBtn.setAttribute('id', song.id);
     likeBtn.innerText = '👍';
-    likesSec.append(likes, likeBtn);
+    let dislikeBtn = document.createElement('button');
+    dislikeBtn.setAttribute('class', 'dislike-button');
+    dislikeBtn.setAttribute('id', song.id);
+    dislikeBtn.innerText = '👎';
+    dislikeBtn.addEventListener('click', subtractLikes);
+    likeBtn.addEventListener('click', addLikes)
+    btnDiv.append(likeBtn, dislikeBtn)
+    likesSection.append(likes, btnDiv);
+
+
+    function addLikes(){
+        const id = song.id
+        likesNum = parseInt(likes.innerText.split(" ")[0]);
+        addNum = likesNum + 1;
+        likes.innerText = `${addNum} likes`
+
+        fetch(`http://localhost:3000/favorite_songs/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                "likes": addNum
+            })
+        })
+
+    }
+
+    function subtractLikes(){
+        const id = song.id
+        likesNum = parseInt(likes.innerText.split(" ")[0]);
+        subtractNum = likesNum - 1;
+        likes.innerText = `${subtractNum} likes`
+
+        fetch(`http://localhost:3000/favorite_songs/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                "likes": subtractNum
+            })
+        })
+
+    }
+    
 
     let ul = document.createElement('ul');
     ul.setAttribute('class', 'comments');
@@ -94,7 +140,7 @@ function addSongCards (song) {
     commentForm.append(commentInput, commentBtn);
 
 
-    songCard.append(userTitle, songHeader, video, likesSec, ul, commentForm);
+    songCard.append(userTitle, songHeader, video, likesSection, ul, commentForm);
     cardsContainer.append(songCard);
 }
 

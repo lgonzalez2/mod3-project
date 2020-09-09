@@ -1,3 +1,4 @@
+
 class FavoriteSongsController < ApplicationController
 
     def index
@@ -12,6 +13,17 @@ class FavoriteSongsController < ApplicationController
         else 
             render json: { message: 'No song found with that id' }
         end 
+    end
+
+    def update
+        song = FavoriteSong.find(params[:id])
+        song.update(like_params);
+    end
+
+    private
+
+    def like_params
+        params.permit(:likes)
     end
 
 end
