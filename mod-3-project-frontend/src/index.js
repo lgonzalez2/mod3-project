@@ -60,7 +60,6 @@ function addSongCards (song) {
     let likes = document.createElement('span');
     const btnDiv = document.createElement('div');
     btnDiv.setAttribute('class', 'button-div');
-    console.log(btnDiv)
 
     likes.setAttribute('class', 'likes');
     likes.innerText = `${song.likes} likes`;
@@ -146,7 +145,7 @@ function addSongCards (song) {
 
 
 loginForm.addEventListener('submit', (e) => {
-    e.preventDefault(e);
+    e.preventDefault();
     loginContainer.style.display = "none";
     cardsContainer.style.display = "grid";
     let currentUser = e.target.username.value;
@@ -158,15 +157,17 @@ loginForm.addEventListener('submit', (e) => {
         fetch('http://localhost:3000/users', {
         method: 'POST',
         headers: {
-            Accept: "application/json",
-            'Content-Type': "application/json"
+            'Content-Type': "application/json",
+            Accept: "application/json"
         },
         body: JSON.stringify({
-            "username": currentUser}),
+            "username": currentUser
+            })
         })
-            .then(res => res.json()).then(json => {
+            .then(res => res.text())
+            .then(json => {
         user = json;
-        sessionStorage.setItem('userId', user.id)
+        sessionStorage.setItem('userId', user.id);
         })
     }
 });
