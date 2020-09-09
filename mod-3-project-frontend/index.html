@@ -4,20 +4,40 @@
     <meta charset="utf-8" />
     <title>Project_3</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script defer type="text/javascript" src="src/index.js"></script>
   </head>
   <body>
     <!-- logo -->
     <img class="logo" src="https://www.snakeriveranimalshelter.org/wp-content/uploads/example-logo.jpg" />
 
-    <!-- image card -->
-    <div class="favorite-songs-container">
+    <div class="login-container" style="display: block;">
+        <form class="login-form">
+          <h3>Login</h3>
+  
+          <input
+            type="text"
+            name="username"
+            value=""
+            placeholder="Please enter your username..."
+            class="input-text"
+          />
+          <br />
+          <input
+          type="submit"
+          name="login-submit"
+          value="Submit"
+          class="submit"
+        />
+        </form>
+    </div>
+
+    <!-- songs cards -->
+    <div class="favorite-songs-container" style="display: none;">
       <div class="song-card" id='1'>
         <h2 class="user-title">lgonzalez</h2>
         <header class="song-header">
             <h1>"Comfortably Numb" - Pink Floyd (Template)</h1>
         </header>
-      <iframe width="350" height="315" src="https://www.youtube.com/embed/_FrOQC-zEog" frameborder="0" gesture= "media" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe width="350" height="315" src="https://www.youtube.com/embed/_FrOQC-zEog" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <div class="likes-section">
           <span class="likes">0 likes</span>
           <button class="like-button" id='1'>
@@ -38,6 +58,7 @@
         </form>
       </div>
     </div>
+    <script defer type="text/javascript" src="src/index.js"></script>
   </body>
 </html>
 

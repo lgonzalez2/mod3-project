@@ -13,12 +13,48 @@
   .logo {
     margin-bottom: 20px;
   }
+
+  .login-form {
+    width: 100%;
+    justify-self: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  
+  .submit {
+    position: relative;
+    background-color: #0139f1;
+    border-radius: 5px;
+    height: 2rem;
+    width: max-content;
+    color: whitesmoke;
+    font-size: 18px;
+    justify-self: center;
+    font-family: monospace;
+    margin: 3px;
+  }
+  
+  .submit:hover {
+    background-color: whitesmoke;
+    border: #e04b52 solid 1px;
+    color: #e04b52;
+  }
+  
+  
+  .input-text {
+    border-radius: 5px;
+    height: 2rem;
+    width: 23%;
+    font-size: 18px;
+    font-family: monospace;
+    margin: 3px;
+  }
   
   .favorite-songs-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, 350px);
     grid-gap: 3rem;
-    padding-top: 10px;
+    padding-top: 30px;
     padding-bottom: 30px;
     justify-content: center;
   }

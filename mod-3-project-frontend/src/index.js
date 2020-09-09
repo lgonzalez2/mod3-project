@@ -1,9 +1,16 @@
 const cardsContainer = document.querySelector('.favorite-songs-container');
+const loginForm = document.querySelector('.login-form');
+const loginContainer = document.querySelector('.login-container');
+
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
 loadFavoriteSongs()
 });
+
+
+
 
 function loadFavoriteSongs() {
     fetch('http://localhost:3000/favorite_songs')
@@ -37,7 +44,6 @@ function addSongCards (song) {
     video.setAttribute('height', '315');
     video.setAttribute('src', song.video_url);
     video.setAttribute('frameborder', '0');
-    video.setAttribute('gesture', 'media');
     video.setAttribute('allow', "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture");
     video.setAttribute('allowfullscreen', '');
     //Even though they ^ will still display, some vids might not be able to play 
@@ -81,3 +87,11 @@ function addSongCards (song) {
     songCard.append(userTitle, songHeader, video, likesSec, ul, commentForm);
     cardsContainer.append(songCard);
 }
+
+
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('Hello');
+    loginContainer.style.display = "none";
+    cardsContainer.style.display = "grid";
+  });
