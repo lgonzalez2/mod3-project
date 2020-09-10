@@ -73,26 +73,6 @@ loginForm.addEventListener('submit', (e) => {
 });
 
 
-addSongBtn.addEventListener('click', () => {
-    addSong = !addSong;
-    if (addSong) {
-      songFormContainer.style.display = "block";
-      songFormContainer.addEventListener('submit', (e) => {
-        e.preventDefault();
-        addNewSong(e.target);
-      });
-    } else {
-      songFormContainer.style.display = "none";
-    }
-});
-
-
-function addNewSong(song_data) {
-    console.log(sessionStorage.username);
-    console.log(song_data.video.value);
-}
-
-
 function loadFavoriteSongs() {
     fetch('http://localhost:3000/favorite_songs')
         .then(res => res.json())
@@ -112,7 +92,8 @@ function addSongCards (song) {
 
     let userTitle = document.createElement('h2');
     userTitle.setAttribute('class', 'user-title');
-    userTitle.innerText = song.user.username;
+    let findUser = users.find(user => user.id === song.user_id);
+    userTitle.innerText = findUser.username;
 
     let songHeader = document.createElement('header');
     songHeader.setAttribute('class', 'song-header');
@@ -194,22 +175,26 @@ function addSongCards (song) {
 
     let ul = document.createElement('ul');
     ul.setAttribute('class', 'comments');
-    for (let i = 0; i < song.comments.length; i++) {
-        let li = document.createElement('li');
-        let b = document.createElement('b');
 
-        let commentUser = allUsers.find(user => user.id === song.comments[i].user_id);
-        b.innerText = `${commentUser.username}`;
 
-        let x = Math.floor(Math.random() * 256);
-        let y = Math.floor(Math.random() * 256);
-        let z = Math.floor(Math.random() * 256);
-        let bgColor = "rgb(" + x + "," + y + "," + z + ")";
-        b.style.color = bgColor;
-        
-        li.innerText = `${song.comments[i].content} -- `;
-        li.append(b);
-        ul.append(li);
+    if (song.comments) {
+        for (let i = 0; i < song.comments.length; i++) {
+            let li = document.createElement('li');
+            let b = document.createElement('b');
+    
+            let commentUser = allUsers.find(user => user.id === song.comments[i].user_id);
+            b.innerText = `${commentUser.username}`;
+    
+            let x = Math.floor(Math.random() * 256);
+            let y = Math.floor(Math.random() * 256);
+            let z = Math.floor(Math.random() * 256);
+            let bgColor = "rgb(" + x + "," + y + "," + z + ")";
+            b.style.color = bgColor;
+            
+            li.innerText = `${song.comments[i].content} -- `;
+            li.append(b);
+            ul.append(li);
+        }
     }
 
     let commentForm = document.createElement('form');
@@ -229,4 +214,42 @@ function addSongCards (song) {
 
     songCard.append(userTitle, songHeader, video, likesSection, ul, commentForm);
     cardsContainer.append(songCard);
+}
+
+addSongBtn.addEventListener('click', () => {
+    addSong = !addSong;
+    if (addSong) {
+      songFormContainer.style.display = "block";
+      songFormContainer.addEventListener('submit', (e) => {
+        e.preventDefault();
+        addNewSong(e.target);
+      });
+    } else {
+      songFormContainer.style.display = "none";
+    }
+});
+
+
+function addNewSong(song_data) {
+    console.log(sessionStorage.username);
+    console.log(song_data.video.value);
+
+    fetch('http://localhost:3000/favorite_songs', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "title": song_data.title.value,
+            "artist": song_data.artist.value,
+            "video_url": song_data.video.value,
+            "likes": 0,
+            "user_id": Number(sessionStorage.userId)
+        })
+    })
+    .then(res => res.json())
+    .then(song => {
+       addSongCards(song);
+    });
 }
