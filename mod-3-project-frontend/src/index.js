@@ -1,12 +1,64 @@
 const cardsContainer = document.querySelector('.favorite-songs-container');
 const loginForm = document.querySelector('.login-form');
 const loginContainer = document.querySelector('.login-container');
+const allUsers = [];
+const allComments = [];
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.clear();
-    loadFavoriteSongs()
     fetchUsers()
+    fetchComments()
+});
+
+function fetchUsers() {
+    fetch('http://localhost:3000/users')
+        .then(res => res.json())
+        .then(json => {
+    users = json;
+    users.forEach(user => {
+        allUsers.push(user);
+    });
+    });
+};
+
+function fetchComments() {
+    fetch('http://localhost:3000/comments')
+        .then(res => res.json())
+        .then(json => {
+    comments = json;
+    comments.forEach(comment => {
+        allComments.push(comment);
+    });
+    });
+};
+
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    loginContainer.style.display = "none";
+    cardsContainer.style.display = "grid";
+    let currentUser = e.target.username.value;
+    let findUser = users.find(user => user.username === currentUser);
+
+    if (findUser) {
+        sessionStorage.setItem('userId', findUser.id);
+    } else {
+        fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                Accept: "application/json",
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify({
+                "username": currentUser}),
+            })
+                .then(res => res.json()).then(json => {
+            user = json;
+            sessionStorage.setItem('userId', user.id)
+        })
+    }
+    loadFavoriteSongs()
 });
 
 function loadFavoriteSongs() {
@@ -18,14 +70,6 @@ function loadFavoriteSongs() {
         addSongCards(song);
     })
     });
-};
-
-function fetchUsers() {
-    fetch('http://localhost:3000/users')
-        .then(res => res.json())
-        .then(json => {
-    users = json;
-    })
 };
 
 function addSongCards (song) {
@@ -114,13 +158,19 @@ function addSongCards (song) {
         })
 
     }
-    
 
     let ul = document.createElement('ul');
     ul.setAttribute('class', 'comments');
     for (let i = 0; i < song.comments.length; i++) {
         let li = document.createElement('li');
-        li.innerText = song.comments[i].content;
+        let b = document.createElement('b');
+
+        let commentUser = allUsers.find(user => user.id === song.comments[i].user_id);
+        b.innerText = `${commentUser.username}`;
+        b.style.color = 'rgb(2, 40, 255)';
+        
+        li.innerText = `${song.comments[i].content} -- `;
+        li.append(b);
         ul.append(li);
     }
 
@@ -142,32 +192,3 @@ function addSongCards (song) {
     songCard.append(userTitle, songHeader, video, likesSection, ul, commentForm);
     cardsContainer.append(songCard);
 }
-
-
-loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    loginContainer.style.display = "none";
-    cardsContainer.style.display = "grid";
-    let currentUser = e.target.username.value;
-    let findUser = users.find(user => user.username === currentUser);
-
-    if (findUser) {
-        sessionStorage.setItem('userId', findUser.id);
-    } else {
-        fetch('http://localhost:3000/users', {
-        method: 'POST',
-        headers: {
-            'Content-Type': "application/json",
-            Accept: "application/json"
-        },
-        body: JSON.stringify({
-            "username": currentUser
-            })
-        })
-            .then(res => res.text())
-            .then(json => {
-        user = json;
-        sessionStorage.setItem('userId', user.id);
-        })
-    }
-});
