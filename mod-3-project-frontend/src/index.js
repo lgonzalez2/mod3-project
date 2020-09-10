@@ -167,7 +167,12 @@ function addSongCards (song) {
 
         let commentUser = allUsers.find(user => user.id === song.comments[i].user_id);
         b.innerText = `${commentUser.username}`;
-        b.style.color = 'rgb(2, 40, 255)';
+
+        let x = Math.floor(Math.random() * 256);
+        let y = Math.floor(Math.random() * 256);
+        let z = Math.floor(Math.random() * 256);
+        let bgColor = "rgb(" + x + "," + y + "," + z + ")";
+        b.style.color = bgColor;
         
         li.innerText = `${song.comments[i].content} -- `;
         li.append(b);
