@@ -1,8 +1,11 @@
 const cardsContainer = document.querySelector('.favorite-songs-container');
 const loginForm = document.querySelector('.login-form');
 const loginContainer = document.querySelector('.login-container');
+const songFormContainer = document.querySelector(".song-form-container");
+const addSongBtn = document.querySelector(".new-song-btn");
 const allUsers = [];
 const allComments = [];
+let addSong = false;
 
 
 
@@ -37,7 +40,9 @@ function fetchComments() {
 loginForm.addEventListener('submit', (e) => {
     
     e.preventDefault();
+    songFormContainer.style.display = "none";
     loginContainer.style.display = "none";
+    addSongBtn.style.display = "block";
     cardsContainer.style.display = "grid";
     let currentUser = e.target.username.value;
     let findUser = users.find(user => user.username === currentUser);
@@ -48,18 +53,13 @@ loginForm.addEventListener('submit', (e) => {
 
     if (findUser) {
         sessionStorage.setItem('userId', findUser.id);
-        makeAComment(findUser)
+        sessionStorage.setItem('username', findUser.username)
     } else {
         fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: {
-<<<<<<< HEAD
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-=======
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
->>>>>>> c00ff8e777775bb15b00092254e418c42298bbf6
             },
             body: JSON.stringify(newUser)
         })
@@ -67,18 +67,30 @@ loginForm.addEventListener('submit', (e) => {
         .then(user => {
             sessionStorage.setItem('userId', user.id)
             sessionStorage.setItem('username', user.username)
-            makeAComment(user)
         })
     }
     loadFavoriteSongs()
-    // console.log(sessionStorage.userId)
 });
 
-function makeAComment(User) {
-    console.log(sessionStorage.username)
 
+addSongBtn.addEventListener('click', () => {
+    addSong = !addSong;
+    if (addSong) {
+      songFormContainer.style.display = "block";
+      songFormContainer.addEventListener('submit', (e) => {
+        e.preventDefault();
+        addNewSong(e.target);
+      });
+    } else {
+      songFormContainer.style.display = "none";
+    }
+});
+
+
+function addNewSong(song_data) {
+    console.log(sessionStorage.username);
+    console.log(song_data.video.value);
 }
-
 
 
 function loadFavoriteSongs() {

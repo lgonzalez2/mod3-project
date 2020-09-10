@@ -9,6 +9,7 @@
     <!-- logo -->
     <img class="logo" src="https://www.snakeriveranimalshelter.org/wp-content/uploads/example-logo.jpg" />
 
+    <!-- login -->
     <div class="login-container" style="display: block;">
         <form class="login-form">
           <h3>Login</h3>
@@ -29,6 +30,48 @@
         />
         </form>
     </div>
+
+    <!-- new song form-->
+
+    <div class="song-form-container" style="display: none;">
+        <form class="song-form">
+          <h3>Make a new post!</h3>
+  
+          <input
+            type="text"
+            name="artist"
+            value=""
+            placeholder="Enter an artist name..."
+            class="input-text"
+          />
+          <br />
+          <input
+            type="text"
+            name="title"
+            value=""
+            placeholder="Enter a song title..."
+            class="input-text"
+          />
+          <br />
+          <input
+            type="text"
+            name="video"
+            value=""
+            placeholder="Enter a url (Ex: https://www.youtube.com/embed/TFjmvfRvjTc)"
+            class="input-url-text"
+          />
+          <br />
+          <input
+            type="submit"
+            name="submit"
+            value="Create New Post"
+            class="submit"
+          />
+        </form>
+      </div>
+      <p style="text-align:center">
+        <button class="new-song-btn" style="display: none;">Add a Song!</button>
+      </p>
 
     <!-- songs cards -->
     <div class="favorite-songs-container" style="display: none;">
