@@ -15,6 +15,9 @@ class UsersController < ApplicationController
     end
 
     def create 
-        User.create(username: params[:username])
-    end 
+        new_user = User.create(username: params[:username])
+
+        render json: new_user, only: [:id, :username]
+    end
+
 end
