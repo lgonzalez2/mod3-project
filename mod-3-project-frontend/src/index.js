@@ -237,7 +237,6 @@ function newComment(){
         content: input
     }
 
-
     event.preventDefault()
     //we want to the user to add a comment to the comment section.
     //comments require :content, :user, :favorite_song
