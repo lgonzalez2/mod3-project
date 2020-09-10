@@ -16,6 +16,15 @@ class CommentsController < ApplicationController
 
     def create
         new_comment = Comment.create(user_id: params[:user_id], favorite_song_id: params[:favorite_song_id], content: params[:content])
+<<<<<<< HEAD
         render json: new_comment, only: [:id, :user_id, :favorite_song_id, :content]
     end
+=======
+
+        render json: new_comment, only: [:user_id, :favorite_song, :content]
+    
+    end
+
+   
+>>>>>>> eb6597fb3c1263cc858be6432f009d5b82f24be8
 end
