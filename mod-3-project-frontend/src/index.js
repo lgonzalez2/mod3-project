@@ -218,7 +218,52 @@ function addSongCards (song) {
 
     songCard.append(userTitle, songHeader, video, likesSection, ul, commentForm);
     cardsContainer.append(songCard);
+
+    commentForm.addEventListener('submit', newComment)
 }
+
+
+
+function newComment(){
+    event.preventDefault()
+    let input = event.target.children[0].value;
+    let commentsUl = event.target.parentElement.children[4];
+
+    newUserComment = {
+        user_id: Number(sessionStorage.userId),
+        favorite_song_id: Number(event.target.parentElement.id),
+        content: input
+    }
+    //we want to the user to add a comment to the comment section.
+    //comments require :content, :user, :favorite_song
+    fetch('http://localhost:3000/comments', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUserComment)
+    })
+
+    let li = document.createElement('li');
+    let b = document.createElement('b');
+    b.innerText = `${sessionStorage.username}`;
+    let x = Math.floor(Math.random() * 256);
+    let y = Math.floor(Math.random() * 256);
+    let z = Math.floor(Math.random() * 256);
+    let bgColor = "rgb(" + x + "," + y + "," + z + ")";
+    b.style.color = bgColor;
+    li.innerText = `${input} -- `;
+    li.append(b);
+    commentsUl.append(li);
+}
+
+
+
+
+
+
+
 
 addSongBtn.addEventListener('click', () => {
     addSong = !addSong;
