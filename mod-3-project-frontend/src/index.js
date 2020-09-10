@@ -7,8 +7,6 @@ const allUsers = [];
 const allComments = [];
 let addSong = false;
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.clear();
     fetchUsers()
@@ -53,7 +51,7 @@ loginForm.addEventListener('submit', (e) => {
 
     if (findUser) {
         sessionStorage.setItem('userId', findUser.id);
-        sessionStorage.setItem('username', findUser.username)
+        sessionStorage.setItem('username', findUser.username);
     } else {
         fetch('http://localhost:3000/users', {
             method: 'POST',
@@ -71,7 +69,6 @@ loginForm.addEventListener('submit', (e) => {
     }
     loadFavoriteSongs()
 });
-
 
 function loadFavoriteSongs() {
     fetch('http://localhost:3000/favorite_songs')
@@ -203,6 +200,7 @@ function addSongCards (song) {
 
     let commentForm = document.createElement('form');
     commentForm.setAttribute('class', 'comment-form');
+    commentForm.setAttribute('id', song.id)
     let commentInput = document.createElement('input');
     commentInput.setAttribute('class', 'comment-input');
     commentInput.setAttribute('type', 'text');
@@ -218,6 +216,8 @@ function addSongCards (song) {
 
     songCard.append(userTitle, songHeader, video, likesSection, ul, commentForm);
     cardsContainer.append(songCard);
+  
+    commentForm.addEventListener('submit', newComment)
 }
 
 addSongBtn.addEventListener('click', () => {
@@ -237,12 +237,12 @@ addSongBtn.addEventListener('click', () => {
 
 function addNewSong(song_data) {
     fetch('http://localhost:3000/favorite_songs', {
-        method: 'POST',
+       method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
+      body: JSON.stringify({
             "title": song_data.title.value,
             "artist": song_data.artist.value,
             "video_url": song_data.video.value,
@@ -254,4 +254,54 @@ function addNewSong(song_data) {
     .then(song => {
        addSongCards(song);
     });
+}
+
+function newComment(){
+    const li = document.createElement('li');
+    const input = event.target.children[0].value;
+
+    // debugger
+
+    const commentsUl = event.target.parentElement.children[4];
+    
+    let b = document.createElement('b');
+    b.innerText = `${sessionStorage.username}`;
+    let x = Math.floor(Math.random() * 256);
+    let y = Math.floor(Math.random() * 256);
+    let z = Math.floor(Math.random() * 256);
+    let bgColor = "rgb(" + x + "," + y + "," + z + ")";
+    b.style.color = bgColor;
+
+    li.innerText = `${input} -- `;
+    li.append(b);
+    commentsUl.append(li);
+
+    
+    const songCardId = event.target.parentElement.id
+
+   
+    newUserComment = {
+        user_id: Number(sessionStorage.userId),
+        favorite_song_id: Number(songCardId),
+        content: input
+    }
+
+
+    event.preventDefault()
+    //we want to the user to add a comment to the comment section.
+    //comments require :content, :user, :favorite_song
+
+    fetch('http://localhost:3000/comments', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUserComment)
+    })
+    
+    // const formInput = event.target.children[0];
+    // console.log(formInput)
+    // formInput.reset();
+
 }
