@@ -53,7 +53,8 @@ loginForm.addEventListener('submit', (e) => {
         fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
             },
             body: JSON.stringify(newUser)
         })
@@ -139,7 +140,7 @@ function addSongCards (song) {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                Accept: 'application/json'
             },
             body: JSON.stringify({
                 "likes": addNum
@@ -158,7 +159,7 @@ function addSongCards (song) {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                Accept: 'application/json'
             },
             body: JSON.stringify({
                 "likes": subtractNum
