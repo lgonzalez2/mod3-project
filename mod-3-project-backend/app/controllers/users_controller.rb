@@ -14,8 +14,8 @@ class UsersController < ApplicationController
         end 
     end
 
-    def create 
-        puts "create user"
+    def create
         User.create(username: params[:username])
-    end 
+    end
+
 end

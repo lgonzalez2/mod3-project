@@ -146,12 +146,12 @@ function addSongCards (song) {
 
 
 loginForm.addEventListener('submit', (e) => {
-    e.preventDefault(e);
+    e.preventDefault();
     loginContainer.style.display = "none";
     cardsContainer.style.display = "grid";
     let currentUser = e.target.username.value;
     let findUser = users.find(user => user.username === currentUser);
-
+ 
     if (findUser) {
         sessionStorage.setItem('userId', findUser.id);
     } else {
@@ -164,9 +164,10 @@ loginForm.addEventListener('submit', (e) => {
         body: JSON.stringify({
             "username": currentUser}),
         })
-            .then(res => res.json()).then(json => {
-        user = json;
-        sessionStorage.setItem('userId', user.id)
-        })
+            .then(res => console.log(res.json()))
+        //     .then(name => {
+        // user = name;
+        // sessionStorage.setItem('userId', user.id);
+        // })
     }
 });
