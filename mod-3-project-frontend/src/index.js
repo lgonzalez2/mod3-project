@@ -34,7 +34,6 @@ function fetchComments() {
     });
 };
 
-
 loginForm.addEventListener('submit', (e) => {
     
     e.preventDefault();
@@ -49,10 +48,12 @@ loginForm.addEventListener('submit', (e) => {
 
     if (findUser) {
         sessionStorage.setItem('userId', findUser.id);
+        makeAComment(findUser)
     } else {
         fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(newUser)
@@ -60,11 +61,18 @@ loginForm.addEventListener('submit', (e) => {
         .then(res => res.json())
         .then(user => {
             sessionStorage.setItem('userId', user.id)
+            sessionStorage.setItem('username', user.username)
+            makeAComment(user)
         })
     }
     loadFavoriteSongs()
+    // console.log(sessionStorage.userId)
 });
 
+function makeAComment(User) {
+    console.log(sessionStorage.username)
+
+}
 
 
 
