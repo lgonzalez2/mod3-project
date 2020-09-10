@@ -226,6 +226,7 @@ addSongBtn.addEventListener('click', () => {
       songFormContainer.style.display = "block";
       songFormContainer.addEventListener('submit', (e) => {
         e.preventDefault();
+        songFormContainer.style.display = "none";
         addNewSong(e.target);
       });
     } else {
@@ -235,9 +236,6 @@ addSongBtn.addEventListener('click', () => {
 
 
 function addNewSong(song_data) {
-    console.log(sessionStorage.username);
-    console.log(song_data.video.value);
-
     fetch('http://localhost:3000/favorite_songs', {
         method: 'POST',
         headers: {
