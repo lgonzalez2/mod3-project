@@ -34,12 +34,18 @@ function fetchComments() {
     });
 };
 
+
 loginForm.addEventListener('submit', (e) => {
+    
     e.preventDefault();
     loginContainer.style.display = "none";
     cardsContainer.style.display = "grid";
     let currentUser = e.target.username.value;
     let findUser = users.find(user => user.username === currentUser);
+    
+    let newUser = {
+        username: currentUser
+    }
 
     if (findUser) {
         sessionStorage.setItem('userId', findUser.id);
@@ -47,24 +53,26 @@ loginForm.addEventListener('submit', (e) => {
         fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: {
-                Accept: "application/json",
-                'Content-Type': "application/json"
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                "username": currentUser}),
-            })
-                .then(res => res.json()).then(json => {
-            user = json;
+            body: JSON.stringify(newUser)
+        })
+        .then(res => res.json())
+        .then(user => {
             sessionStorage.setItem('userId', user.id)
         })
     }
     loadFavoriteSongs()
 });
 
+
+
+
 function loadFavoriteSongs() {
     fetch('http://localhost:3000/favorite_songs')
         .then(res => res.json())
         .then(json => {
+            
     songs = json;
     songs.forEach(song => {
         addSongCards(song);
@@ -197,31 +205,3 @@ function addSongCards (song) {
     songCard.append(userTitle, songHeader, video, likesSection, ul, commentForm);
     cardsContainer.append(songCard);
 }
-
-
-loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    loginContainer.style.display = "none";
-    cardsContainer.style.display = "grid";
-    let currentUser = e.target.username.value;
-    let findUser = users.find(user => user.username === currentUser);
- 
-    if (findUser) {
-        sessionStorage.setItem('userId', findUser.id);
-    } else {
-        fetch('http://localhost:3000/users', {
-        method: 'POST',
-        headers: {
-            Accept: "application/json",
-            'Content-Type': "application/json"
-        },
-        body: JSON.stringify({
-            "username": currentUser}),
-        })
-            .then(res => console.log(res.json()))
-        //     .then(name => {
-        // user = name;
-        // sessionStorage.setItem('userId', user.id);
-        // })
-    }
-});
