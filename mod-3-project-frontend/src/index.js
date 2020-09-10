@@ -93,7 +93,11 @@ function addSongCards (song) {
     let userTitle = document.createElement('h2');
     userTitle.setAttribute('class', 'user-title');
     let findUser = users.find(user => user.id === song.user_id);
-    userTitle.innerText = findUser.username;
+    if (findUser) {
+        userTitle.innerText = findUser.username;
+    } else {
+        userTitle.innerText = sessionStorage.username;
+    }
 
     let songHeader = document.createElement('header');
     songHeader.setAttribute('class', 'song-header');
