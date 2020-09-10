@@ -108,6 +108,15 @@
     overflow: hidden;
   }
   
+  .user-title {
+    background-color: white;
+  }
+
+  /* .song-header {
+    background-color: rgb(240, 4, 4);
+    border: 1px solid #030303;
+  } */
+
   .image {
     width: 300px;
     border: 1px solid black;
