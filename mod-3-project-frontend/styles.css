@@ -33,11 +33,40 @@
     font-family: monospace;
     margin: 3px;
   }
+
+  .button {
+    position: center;
+    background-color: #0139f1;
+    border-radius: 5px;
+    height: 2rem;
+    width: max-content;
+    color: whitesmoke;
+    font-size: 18px;
+    justify-self: center;
+    font-family: monospace;
+    margin: 3px;
+  }
+
+
+  .new-song-btn {
+    position: center;
+    background-color: #0139f1;
+    border-radius: 5px;
+    height: 2rem;
+    width: max-content;
+    color: whitesmoke;
+    font-size: 18px;
+    justify-self: center;
+    font-family: monospace;
+    margin: 3px;
+  }
+
+
   
   .submit:hover {
     background-color: whitesmoke;
-    border: #e04b52 solid 1px;
-    color: #e04b52;
+    border: #0139f1 solid 1px;
+    color: #0139f1;
   }
   
   
@@ -47,7 +76,16 @@
     width: 23%;
     font-size: 18px;
     font-family: monospace;
-    margin: 3px;
+    margin: 5px;
+  }
+
+  .input-url-text {
+    border-radius: 5px;
+    height: 2rem;
+    width: 46%;
+    font-size: 18px;
+    font-family: monospace;
+    margin: 5px;
   }
   
   .favorite-songs-container {
@@ -70,6 +108,15 @@
     overflow: hidden;
   }
   
+  .user-title {
+    background-color: white;
+  }
+
+  /* .song-header {
+    background-color: rgb(240, 4, 4);
+    border: 1px solid #030303;
+  } */
+
   .image {
     width: 300px;
     border: 1px solid black;

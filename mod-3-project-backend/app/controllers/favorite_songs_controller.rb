@@ -3,7 +3,7 @@ class FavoriteSongsController < ApplicationController
 
     def index
         favorite_songs = FavoriteSong.all
-        render json: favorite_songs, only: [:id, :title, :artist, :video_url, :likes], include: [:user, :comments]
+        render json: favorite_songs, only: [:id, :title, :artist, :video_url, :likes, :user_id], include: [:user, :comments]
     end
 
     def show
@@ -13,6 +13,12 @@ class FavoriteSongsController < ApplicationController
         else 
             render json: { message: 'No song found with that id' }
         end 
+    end
+
+    def create 
+        new_song = FavoriteSong.create(title: params[:title], artist: params[:artist], video_url: params[:video_url], likes: params[:likes], user_id: params[:user_id])
+
+        render json: new_song, only: [:id, :title, :artist, :video_url, :likes, :user_id]
     end
 
     def update
