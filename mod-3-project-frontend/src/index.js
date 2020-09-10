@@ -1,11 +1,10 @@
 const cardsContainer = document.querySelector('.favorite-songs-container');
 const loginForm = document.querySelector('.login-form');
 const loginContainer = document.querySelector('.login-container');
-const songFormContainer = document.querySelector(".song-form-container");
-const addSongBtn = document.querySelector(".new-song-btn");
 const allUsers = [];
 const allComments = [];
-let addSong = false;
+// console.log(document.querySelector('.comment-form'))
+
 
 document.addEventListener('DOMContentLoaded', () => {
     sessionStorage.clear();
@@ -38,9 +37,7 @@ function fetchComments() {
 loginForm.addEventListener('submit', (e) => {
     
     e.preventDefault();
-    songFormContainer.style.display = "none";
     loginContainer.style.display = "none";
-    addSongBtn.style.display = "block";
     cardsContainer.style.display = "grid";
     let currentUser = e.target.username.value;
     let findUser = users.find(user => user.username === currentUser);
@@ -51,7 +48,6 @@ loginForm.addEventListener('submit', (e) => {
 
     if (findUser) {
         sessionStorage.setItem('userId', findUser.id);
-        sessionStorage.setItem('username', findUser.username);
     } else {
         fetch('http://localhost:3000/users', {
             method: 'POST',
@@ -65,6 +61,7 @@ loginForm.addEventListener('submit', (e) => {
         .then(user => {
             sessionStorage.setItem('userId', user.id)
             sessionStorage.setItem('username', user.username)
+
         })
     }
     loadFavoriteSongs()
@@ -89,12 +86,7 @@ function addSongCards (song) {
 
     let userTitle = document.createElement('h2');
     userTitle.setAttribute('class', 'user-title');
-    let findUser = users.find(user => user.id === song.user_id);
-    if (findUser) {
-        userTitle.innerText = findUser.username;
-    } else {
-        userTitle.innerText = sessionStorage.username;
-    }
+    userTitle.innerText = song.user.username;
 
     let songHeader = document.createElement('header');
     songHeader.setAttribute('class', 'song-header');
@@ -146,7 +138,7 @@ function addSongCards (song) {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                Accept: 'application/json'
+                'Accept': 'application/json'
             },
             body: JSON.stringify({
                 "likes": addNum
@@ -165,7 +157,7 @@ function addSongCards (song) {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                Accept: 'application/json'
+                'Accept': 'application/json'
             },
             body: JSON.stringify({
                 "likes": subtractNum
@@ -176,26 +168,22 @@ function addSongCards (song) {
 
     let ul = document.createElement('ul');
     ul.setAttribute('class', 'comments');
+    for (let i = 0; i < song.comments.length; i++) {
+        let li = document.createElement('li');
+        let b = document.createElement('b');
 
+        let commentUser = allUsers.find(user => user.id === song.comments[i].user_id);
+        b.innerText = `${commentUser.username}`;
 
-    if (song.comments) {
-        for (let i = 0; i < song.comments.length; i++) {
-            let li = document.createElement('li');
-            let b = document.createElement('b');
-    
-            let commentUser = allUsers.find(user => user.id === song.comments[i].user_id);
-            b.innerText = `${commentUser.username}`;
-    
-            let x = Math.floor(Math.random() * 256);
-            let y = Math.floor(Math.random() * 256);
-            let z = Math.floor(Math.random() * 256);
-            let bgColor = "rgb(" + x + "," + y + "," + z + ")";
-            b.style.color = bgColor;
-            
-            li.innerText = `${song.comments[i].content} -- `;
-            li.append(b);
-            ul.append(li);
-        }
+        let x = Math.floor(Math.random() * 256);
+        let y = Math.floor(Math.random() * 256);
+        let z = Math.floor(Math.random() * 256);
+        let bgColor = "rgb(" + x + "," + y + "," + z + ")";
+        b.style.color = bgColor;
+        
+        li.innerText = `${song.comments[i].content} -- `;
+        li.append(b);
+        ul.append(li);
     }
 
     let commentForm = document.createElement('form');
@@ -216,51 +204,13 @@ function addSongCards (song) {
 
     songCard.append(userTitle, songHeader, video, likesSection, ul, commentForm);
     cardsContainer.append(songCard);
-  
+
     commentForm.addEventListener('submit', newComment)
-}
-
-addSongBtn.addEventListener('click', () => {
-    addSong = !addSong;
-    if (addSong) {
-      songFormContainer.style.display = "block";
-      songFormContainer.addEventListener('submit', (e) => {
-        e.preventDefault();
-        songFormContainer.style.display = "none";
-        addNewSong(e.target);
-      });
-    } else {
-      songFormContainer.style.display = "none";
-    }
-});
-
-
-function addNewSong(song_data) {
-    fetch('http://localhost:3000/favorite_songs', {
-       method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-      body: JSON.stringify({
-            "title": song_data.title.value,
-            "artist": song_data.artist.value,
-            "video_url": song_data.video.value,
-            "likes": 0,
-            "user_id": Number(sessionStorage.userId)
-        })
-    })
-    .then(res => res.json())
-    .then(song => {
-       addSongCards(song);
-    });
 }
 
 function newComment(){
     const li = document.createElement('li');
     const input = event.target.children[0].value;
-
-    // debugger
 
     const commentsUl = event.target.parentElement.children[4];
     
@@ -276,15 +226,14 @@ function newComment(){
     li.append(b);
     commentsUl.append(li);
 
-    
     const songCardId = event.target.parentElement.id
-
    
     newUserComment = {
         user_id: Number(sessionStorage.userId),
         favorite_song_id: Number(songCardId),
         content: input
     }
+
 
     event.preventDefault()
     //we want to the user to add a comment to the comment section.
@@ -299,8 +248,5 @@ function newComment(){
         body: JSON.stringify(newUserComment)
     })
     
-    // const formInput = event.target.children[0];
-    // console.log(formInput)
-    // formInput.reset();
-
+    // const formInput = event.target.children[0]
 }
