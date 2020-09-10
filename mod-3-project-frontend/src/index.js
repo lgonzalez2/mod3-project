@@ -184,7 +184,10 @@ function addSongCards (song) {
     commentForm.append(commentInput, commentBtn);
     songCard.append(userTitle, songHeader, video, likesSection, ul, commentForm);
     cardsContainer.append(songCard);
-    commentForm.addEventListener('submit', newComment)
+    commentForm.addEventListener('submit', () => {
+        newComment()
+        commentForm.reset();
+    }); 
 }
 function newComment(){
     event.preventDefault()
