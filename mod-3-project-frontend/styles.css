@@ -252,5 +252,9 @@
   .comment-button:focus {
     outline: none;
   }
+
+.post-header {
+  color: white;
+}
   
   
