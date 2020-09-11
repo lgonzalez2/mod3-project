@@ -91,15 +91,6 @@
     font-family: monospace;
     margin: 5px;
   }
-
-  .input-url-text {
-    border-radius: 5px;
-    height: 2rem;
-    width: 46%;
-    font-size: 18px;
-    font-family: monospace;
-    margin: 5px;
-  }
   
   .favorite-songs-container {
     display: grid;
@@ -115,7 +106,7 @@
     border: 8px solid #030303;
     border-radius: 20px;
     text-align: left;
-    background-color: #8f02b96e;
+    background-color: #5703719f;
     box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
     transition: all .5s ease; /* back to normal */
     overflow: hidden;
@@ -142,7 +133,7 @@
   }
 
   .post-header {
-    color: white;
+    color: black;
   }
 
   .song-header {

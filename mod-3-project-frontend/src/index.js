@@ -3,6 +3,7 @@ const loginForm = document.querySelector('.login-form');
 const loginContainer = document.querySelector('.login-container');
 const songFormContainer = document.querySelector(".song-form-container");
 const addSongBtn = document.querySelector(".new-song-btn");
+const songForm = document.querySelector('.song-form');
 const allUsers = [];
 const allComments = [];
 let addSong = false;
@@ -228,12 +229,19 @@ addSongBtn.addEventListener('click', () => {
         e.preventDefault();
         songFormContainer.style.display = "none";
         addNewSong(e.target);
+        addSong = false;
       });
     } else {
       songFormContainer.style.display = "none";
+      addSong = false;
     }
 });
 function addNewSong(song_data) {
+    let url = song_data.video.value;
+    let id1 = url.split("?v=")[1];
+    let id2 = id1.split("&ab_")[0];
+    let embedlink = "http://www.youtube.com/embed/" + id2;
+
     fetch('http://localhost:3000/favorite_songs', {
         method: 'POST',
         headers: {
@@ -243,7 +251,7 @@ function addNewSong(song_data) {
         body: JSON.stringify({
             "title": song_data.title.value,
             "artist": song_data.artist.value,
-            "video_url": song_data.video.value,
+            "video_url": embedlink,
             "likes": 0,
             "user_id": Number(sessionStorage.userId)
         })
