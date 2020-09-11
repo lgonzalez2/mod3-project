@@ -138,6 +138,10 @@
     color: #0281f7;
   }
 
+  .post-header {
+    color: white;
+  }
+
   .song-header {
     text-align: center;
     padding: 15px 10px;
