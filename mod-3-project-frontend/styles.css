@@ -27,7 +27,7 @@
   
   .submit {
     position: relative;
-    background-color: #0139f1;
+    background-color: #b901f18e;
     border-radius: 5px;
     height: 2rem;
     width: max-content;
@@ -40,7 +40,7 @@
 
   .button {
     position: center;
-    background-color: #0139f1;
+    background-color: #b901f1;
     border-radius: 5px;
     height: 2rem;
     width: max-content;
@@ -54,7 +54,7 @@
 
   .new-song-btn {
     position: center;
-    background-color: #0139f1;
+    background-color: #b901f18e;
     border-radius: 5px;
     height: 2rem;
     width: max-content;
@@ -67,16 +67,16 @@
 
   .new-song-btn:hover {
     background-color: whitesmoke;
-    border: #0139f1 solid 1px;
-    color: #0139f1;
+    border: #b901f18e solid 1px;
+    color: #b901f18e;
   }
 
 
   
   .submit:hover {
     background-color: whitesmoke;
-    border: #0139f1 solid 1px;
-    color: #0139f1;
+    border: #b901f18e solid 1px;
+    color: #b901f18e;
   }
   
   
@@ -112,14 +112,10 @@
     border: 8px solid #030303;
     border-radius: 20px;
     text-align: left;
-    background-color: white;
+    background-color: #8f02b96e;
     box-shadow: 8px 14px 38px rgba(39,44,49,.06), 1px 3px 8px rgba(39,44,49,.03);
     transition: all .5s ease; /* back to normal */
     overflow: hidden;
-  }
-  
-  .user-title {
-    background-color: white;
   }
 
   /* .song-header {
@@ -133,11 +129,13 @@
   }
   
   .user-title {
+    background-color: #8f02b96e;
+    border: 1px solid #030303;
     text-align: left;
     padding: 15px 10px;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #0602f7dd;
+    color: #0281f7;
   }
 
   .song-header {
@@ -145,7 +143,7 @@
     padding: 15px 10px;
     font-size: 0.9rem;
     font-weight: 600;
-    color: #0d0d0e;
+    color: #eeeef8;
     }
   
   
@@ -159,6 +157,7 @@
   .likes {
     font-size: 0.9rem;
     font-weight: 600;
+    color: #eeeef8;
   }
   
   .like-button {
@@ -219,6 +218,7 @@
   .comments li {
     margin: 2px 0;
     letter-spacing: 0.2px;
+    color: #eeeef8;
   }
   
   .comment-form {
@@ -229,9 +229,15 @@
   }
   
   .comment-input {
+    color: white;
     width: 83%;
-    border: none;
+    border: 2px solid #030303;
     font-size: 0.8rem;
+    background-color: #8f02b96e;
+  }
+
+  .comment-input::placeholder {
+    color: white;
   }
   
   .comment-input:focus {
@@ -239,10 +245,10 @@
   }
   
   .comment-button {
-    border: none;
+    border: 2px solid #030303;
     font-size: 0.8rem;
     font-weight: 600;
-    color: rgb(92, 114, 238);
+    color: #b901f18e;
     cursor: pointer;
     transition: color 300ms;
   }
@@ -259,8 +265,5 @@
     outline: none;
   }
 
-.post-header {
-  color: white;
-}
   
   
