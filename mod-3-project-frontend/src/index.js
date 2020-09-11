@@ -229,11 +229,9 @@ addSongBtn.addEventListener('click', () => {
         e.preventDefault();
         songFormContainer.style.display = "none";
         addNewSong(e.target);
-        addSong = false;
       });
     } else {
       songFormContainer.style.display = "none";
-      addSong = false;
     }
 });
 function addNewSong(song_data) {
