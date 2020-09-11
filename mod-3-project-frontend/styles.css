@@ -65,6 +65,12 @@
     margin: 3px;
   }
 
+  .new-song-btn:hover {
+    background-color: whitesmoke;
+    border: #0139f1 solid 1px;
+    color: #0139f1;
+  }
+
 
   
   .submit:hover {
