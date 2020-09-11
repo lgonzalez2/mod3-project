@@ -16,6 +16,9 @@ FavoriteSong.create(title: "Sunset", artist: "The Midnight", video_url: "https:/
 FavoriteSong.create(title: "Maria Tambien", artist: "Kraungbin", video_url: "https://www.youtube.com/embed/9cN1XCpfWD4", likes: 5, user_id: 3)
 FavoriteSong.create(title: "High Hopes", artist: "Pink Floyd", video_url: "https://www.youtube.com/embed/BGBM5vWiBLo", likes: 2, user_id: 2)
 FavoriteSong.create(title: "Serial Killer", artist: "Lana Del Rey", video_url: "https://www.youtube.com/embed/tNRR_JfLmoI", likes: 8, user_id: 3)
+FavoriteSong.create(title: "Drive Home", artist: "Steven Wilson", video_url: "https://www.youtube.com/embed/FR4-zgLIJvI", likes: 14, user_id: 6)
+
+
 
 
 Comment.create(user_id: 1, favorite_song_id: FavoriteSong.all.sample.id, content: "This song is amazing!")
