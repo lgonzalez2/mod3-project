@@ -5,17 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-3.times do
+7.times do
 User.create(username: Faker::GreekPhilosophers.name)
 end
 
 # video_url needs to be in this format to currently work: "https://www.youtube.com/embed/9cN1XCpfWD4"
 FavoriteSong.create(title: "Hey You", artist: "Pink Floyd", video_url: "https://www.youtube.com/embed/TFjmvfRvjTc", likes: 3, user_id: 3)
 FavoriteSong.create(title: "Stairway to Heaven", artist: "Led Zeppelin", video_url: "https://www.youtube.com/embed/xbhCPt6PZIU", likes: 0, user_id: 2)
-FavoriteSong.create(title: "Sunset", artist: "The Midnight", video_url: "https://www.youtube.com/embed/rEzSMLEJWx8", likes: 10, user_id: 1)
-FavoriteSong.create(title: "Maria Tambien", artist: "Kraungbin", video_url: "https://www.youtube.com/embed/9cN1XCpfWD4", likes: 5, user_id: 2)
+FavoriteSong.create(title: "Sunset", artist: "The Midnight", video_url: "https://www.youtube.com/embed/rEzSMLEJWx8", likes: 10, user_id: 5)
+FavoriteSong.create(title: "Maria Tambien", artist: "Kraungbin", video_url: "https://www.youtube.com/embed/9cN1XCpfWD4", likes: 5, user_id: 3)
+FavoriteSong.create(title: "Serial Killer", artist: "Lana Del Rey", video_url: "https://www.youtube.com/embed/tNRR_JfLmoI", likes: 8, user_id: 3)
 
-Comment.create(user_id: User.first.id, favorite_song_id: FavoriteSong.all.sample.id, content: "This song is amazing!")
-Comment.create(user_id: User.second.id, favorite_song_id: FavoriteSong.all.sample.id, content: "Not the best :(")
-Comment.create(user_id: User.third.id, favorite_song_id: FavoriteSong.all.sample.id, content: "Rock OUTTTTTTT")
-Comment.create(user_id: User.third.id, favorite_song_id: FavoriteSong.all.sample.id, content: "Wow!")
+
+Comment.create(user_id: 1, favorite_song_id: FavoriteSong.all.sample.id, content: "This song is amazing!")
+Comment.create(user_id: 2, favorite_song_id: FavoriteSong.all.sample.id, content: "Not the best :(")
+Comment.create(user_id: 3, favorite_song_id: FavoriteSong.all.sample.id, content: "Rock OUTTTTTTT")
+Comment.create(user_id: 4, favorite_song_id: FavoriteSong.all.sample.id, content: "Love this!")
+Comment.create(user_id: 4, favorite_song_id: FavoriteSong.all.sample.id, content: "Cool")
+Comment.create(user_id: 4, favorite_song_id: FavoriteSong.all.sample.id, content: "Niceeeeeeeeee!")
+Comment.create(user_id: 4, favorite_song_id: FavoriteSong.all.sample.id, content: "Nice vibes")
+Comment.create(user_id: 4, favorite_song_id: FavoriteSong.all.sample.id, content: "Wow!")
