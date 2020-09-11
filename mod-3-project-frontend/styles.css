@@ -15,7 +15,10 @@
   }
   
   .logo {
-    margin-bottom: 20px;
+    max-width: 50%;
+    height: auto;
+    margin-top: 25px;
+    margin-bottom: 100px;
   }
 
   .login-form {
