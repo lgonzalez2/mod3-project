@@ -91,15 +91,6 @@
     font-family: monospace;
     margin: 5px;
   }
-
-  .input-url-text {
-    border-radius: 5px;
-    height: 2rem;
-    width: 46%;
-    font-size: 18px;
-    font-family: monospace;
-    margin: 5px;
-  }
   
   .favorite-songs-container {
     display: grid;
@@ -142,7 +133,7 @@
   }
 
   .post-header {
-    color: white;
+    color: black;
   }
 
   .song-header {
