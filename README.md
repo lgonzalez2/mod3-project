@@ -9,7 +9,7 @@
 
     bundle install
 
-### 4. In order to locally set up the web app, run the following lines from the command line:
+### 4. In order to locally set up the web app, run the following lines from the command line within the backend directory:
 
     rails db:create
     rails db:migrate
